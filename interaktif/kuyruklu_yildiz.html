@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <!-- ✅ GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2F3B9KE37"></script> <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JE1HFWXE1');
+    </script>
+
+<!-- ✅ OPTİMİZE EDİLMİŞ BAŞLIK & META -->
+<title>Kuyruklu Yıldız Simülasyonu — AUI Platform: İnteraktif Uzay Deneyimi</title>
+<meta name="description" content="İnteraktif kuyruklu yıldız simülasyonu: Yüksek çözünürlüklü uzay deneyimi. Sürükle ile yön ver, tıkla ile yeni yıldızlar oluştur. Gerçek zamanlı fizik motoru ile AUI Platform'dan."/>
+<meta name="keywords" content="kuyruklu yıldız simülasyonu, interaktif uzay deneyimi, yıldız fizik simülasyonu, AUI platform, canvas animasyon, gerçek zamanlı fizik, uzay görselleştirme, interaktif astronomi"/>
+<meta name="author" content="Atılım Utku IYIIZ — AUI Platform"/>
+<link rel="canonical" href="https://auiplatform.space/kuyruklu_yildiz.html"/>
+<meta name="robots" content="index, follow"/>
+
+<!-- ✅ OPEN GRAPH -->
+<meta property="og:title" content="Kuyruklu Yıldız Simülasyonu — AUI Platform: İnteraktif Uzay Deneyimi"/>
+<meta property="og:description" content="İnteraktif kuyruklu yıldız simülasyonu: Yüksek çözünürlüklü uzay deneyimi. Sürükle ile yön ver, tıkla ile yeni yıldızlar oluştur."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://auiplatform.space/kuyruklu_yildiz.html"/>
+<meta property="og:image" content="https://auiplatform.space/assets/kuyruklu-yildiz-preview.png"/>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="AUI Platform"/>
+<meta property="og:locale" content="tr_TR"/>
+
+<!-- ✅ TWITTER -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Kuyruklu Yıldız Simülasyonu — AUI Platform: İnteraktif Uzay Deneyimi"/>
+<meta name="twitter:description" content="İnteraktif kuyruklu yıldız simülasyonu: Yüksek çözünürlüklü uzay deneyimi. Sürükle ile yön ver, yeni yıldızlar oluştur."/>
+<meta name="twitter:image" content="https://auiplatform.space/assets/kuyruklu-yildiz-preview.png"/>
+<meta name="twitter:site" content="@auiplatform"/>
+
+<!-- ✅ FAVICON -->
+<link rel="icon" type="image/x-icon" href="https://auiplatform.space/favicon.ico"/>
+<link rel="apple-touch-icon" href="https://auiplatform.space/assets/apple-touch-icon.png"/>
+
+<!-- ✅ STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kuyruklu Yıldız Simülasyonu",
+  "description": "İnteraktif kuyruklu yıldız simülasyonu: Yüksek çözünürlüklü uzay deneyimi ve gerçek zamanlı fizik motoru",
+  "url": "https://auiplatform.space/kuyruklu_yildiz.html",
+  "applicationCategory": "SimulationApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "HTML5 Canvas support required",
+  "permissions": "microphone",
+  "author": {
+    "@type": "Organization",
+    "name": "AUI Platform",
+    "url": "https://auiplatform.space"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AUI Platform",
+    "url": "https://auiplatform.space",
+    "logo": "https://auiplatform.space/assets/favicon.png"
+  },
+  "screenshot": "https://auiplatform.space/assets/kuyruklu-yildiz-preview.png",
+  "softwareVersion": "1.0",
+  "releaseNotes": "İnteraktif kuyruklu yıldız simülasyonu: sürükleme, tıklama ve fizik motoru özellikleri",
+  "featureList": [
+    "Gerçek zamanlı fizik simülasyonu",
+    "Yüksek çözünürlüklü canvas render",
+    "İnteraktif yıldız oluşturma",
+    "Kuyruk partikül sistemi",
+    "DPR adaptif scaling"
+  ],
+  "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "http://schema.org/UseAction",
+    "userInteractionCount": "1"
+  },
+  "inLanguage": "tr-TR",
+  "isAccessibleForFree": true
+}
+</script>
+
+<!-- ✅ SEMANTİK & TEKNİK META -->
+<meta name="theme-color" content="#050810"/>
+<meta name="msapplication-TileColor" content="#050810"/>
+<meta name="generator" content="AUI Platform"/>
+<meta name="coverage" content="Worldwide"/>
+<meta name="language" content="tr"/>
+<meta name="topic" content="kuyruklu yıldız simülasyonu, interaktif uzay, canvas animasyon, fizik motoru"/>
+<meta name="thumbnail" content="https://auiplatform.space/assets/kuyruklu-yildiz-preview.png"/>
+
+<!-- ✅ PERFORMANS OPTİMİZASYONU -->
+<link rel="preload" as="script" href="#"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<style>
+  :root{
+    --bg:#050810;
+    --hud:#cfe8ff;
+  }
+  html,body{height:100%;margin:0;background:radial-gradient(1200px 800px at 50% -10%, #0a1222 0%, var(--bg) 60%, #03060c 100%); overflow:hidden; color:#e6f3ff; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial}
+  #c{display:block; width:100vw; height:100vh;}
+  .hud{
+    position:fixed; left:12px; bottom:12px; padding:8px 12px;
+    background:rgba(10,15,30,.35); border:1px solid rgba(255,255,255,.08);
+    border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.35); backdrop-filter: blur(6px);
+    font-size:12px; line-height:1.5; color:var(--hud); user-select:none
+  }
+  .hud b{color:#fff}
+  .brand{position:fixed; right:14px; top:10px; font-size:12px; opacity:.55; letter-spacing:.08em}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="brand">AUI • Comet v1</div>
+<div class="hud">
+  <b>Kuyruklu Yıldız</b> — sürükle: yön ver • tıkla: yeni yıldız<br/>
+  <span id="info"></span>
+</div>
+
+<script>
+(() => {
+  // ---------- Canvas & HiDPI ----------
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d', { alpha: false });
+  let DPR = Math.max(1, Math.min(3, window.devicePixelRatio || 1)); // 1..3 arası
+  function resize(){
+    const w = Math.floor(innerWidth * DPR), h = Math.floor(innerHeight * DPR);
+    canvas.width = w; canvas.height = h;
+    canvas.style.width = innerWidth+"px"; canvas.style.height = innerHeight+"px";
+  }
+  resize(); addEventListener('resize', resize);
+
+  // ---------- Yardımcılar ----------
+  const rand = (a=0,b=1)=>a+Math.random()*(b-a);
+  const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+  const dist = (x1,y1,x2,y2)=>Math.hypot(x2-x1,y2-y1);
+
+  // ---------- Yıldız Alanı ----------
+  const stars = [];
+  const STAR_COUNT = 600; // yoğun yıldız tarlası
+  function initStars() {
+    stars.length = 0;
+    for(let i=0;i<STAR_COUNT;i++){
+      stars.push({
+        x: rand(0, canvas.width),
+        y: rand(0, canvas.height),
+        r: rand(0.4, 1.6)*DPR,
+        a: rand(0.3, 1),
+        tw: rand(0.002, 0.01),
+        p: Math.random()*Math.PI*2
+      });
+    }
+  }
+  initStars();
+
+  // ---------- Kuyruklu Yıldız ----------
+  const comet = {
+    x: canvas.width*0.15,
+    y: canvas.height*0.55,
+    vx: 0.9*DPR, vy: -0.3*DPR,
+    size: 5*DPR,
+    tail: [],
+    hue: 200, // mavi ton
+    boost: 0
+  };
+
+  const MAX_TAIL = 900; // partikül sayısı (yüksek kalite)
+  function spawnTail(px, py, vx, vy) {
+    // hız vektörünün ters yönünde kuyruk
+    const speed = Math.hypot(vx,vy) + 0.001;
+    const angle = Math.atan2(vy, vx) + Math.PI; // ters yön
+    const spread = 0.45; // kuyruk açısı
+    for (let i=0;i<6;i++){
+      const a = angle + rand(-spread, spread);
+      const s = rand(0.03, 0.20) * speed;
+      comet.tail.push({
+        x: px + rand(-2,2)*DPR,
+        y: py + rand(-2,2)*DPR,
+        vx: Math.cos(a)*s,
+        vy: Math.sin(a)*s,
+        life: rand(0.65, 1.25),
+        age: 0,
+        w: rand(1.5, 3.8)*DPR
+      });
+    }
+    if (comet.tail.length > MAX_TAIL) comet.tail.splice(0, comet.tail.length - MAX_TAIL);
+  }
+
+  // ---------- Etkileşim ----------
+  let dragging = false, last = null;
+  canvas.addEventListener('pointerdown', e => {
+    dragging = true; last = {x:e.clientX*DPR, y:e.clientY*DPR};
+  });
+  addEventListener('pointerup', ()=> dragging=false);
+  addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const nx = e.clientX*DPR, ny = e.clientY*DPR;
+    comet.vx += (nx - last.x) * 0.02;
+    comet.vy += (ny - last.y) * 0.02;
+    last = {x:nx,y:ny};
+    comet.boost = 1; // geçici parıltı
+  });
+  // Tıklayınca ekstra yıldız
+  canvas.addEventListener('click', e=>{
+    stars.push({x:e.clientX*DPR,y:e.clientY*DPR,r:rand(1.2,2.2)*DPR,a:1,tw:rand(0.002,0.008),p:0});
+  });
+
+  // ---------- Çizim ----------
+  function drawBackground(){
+    // hafif motion blur'lü uzay dokusu
+    ctx.fillStyle = '#050810';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    // yıldızlar (twinkle efekti)
+    for (const s of stars){
+      s.p += s.tw;
+      const a = s.a * (0.75 + Math.sin(s.p)*0.25);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = '#cfe8ff';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function drawComet(){
+    // Kuyruk partikülleri
+    for (let i=comet.tail.length-1; i>=0; i--){
+      const p = comet.tail[i];
+      p.x += p.vx; p.y += p.vy;
+      p.age += 0.012;
+      const t = 1 - p.age / p.life;
+      if (t <= 0){ comet.tail.splice(i,1); continue; }
+
+      // plazma benzeri iz
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.w*2);
+      g.addColorStop(0, `hsla(${comet.hue}, 100%, 70%, ${0.35*t})`);
+      g.addColorStop(1, `hsla(${comet.hue}, 100%, 50%, 0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.w*2.2, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // Çekirdek parıltısı
+    const glow = ctx.createRadialGradient(comet.x, comet.y, 0, comet.x, comet.y, comet.size*7);
+    const boost = Math.max(1, 1 + comet.boost*0.8);
+    glow.addColorStop(0, `hsla(${comet.hue}, 100%, ${70*boost}%, 0.95)`);
+    glow.addColorStop(0.35, `hsla(${comet.hue}, 100%, 60%, 0.35)`);
+    glow.addColorStop(1, `hsla(${comet.hue}, 100%, 50%, 0)`);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(comet.x, comet.y, comet.size*7, 0, Math.PI*2); ctx.fill();
+
+    // Çekirdek
+    ctx.fillStyle = `hsl(${comet.hue},100%,90%)`;
+    ctx.beginPath();
+    ctx.ellipse(comet.x, comet.y, comet.size*1.1, comet.size*0.9, Math.atan2(comet.vy, comet.vx), 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // ---------- Fizik ----------
+  let t = 0;
+  function step(){
+    t += 0.0025;
+    // Hafif "yörünge" çekimi (merkeze doğru)
+    const cx = canvas.width*0.5, cy = canvas.height*0.5;
+    const dx = cx - comet.x, dy = cy - comet.y;
+    const d = Math.hypot(dx,dy);
+    const grav = clamp(0.00015 * d, 0, 0.12); // yumuşak çekim
+    comet.vx += dx * grav;
+    comet.vy += dy * grav;
+
+    // Direnç + boost damping
+    comet.vx *= 0.992; comet.vy *= 0.992;
+    comet.boost *= 0.90;
+
+    // Hareket
+    comet.x += comet.vx;
+    comet.y += comet.vy;
+
+    // Kuyruk üret
+    spawnTail(comet.x, comet.y, comet.vx, comet.vy);
+
+    // Kenarlardan yumuşak sekme
+    const m = 30*DPR;
+    if (comet.x < m || comet.x > canvas.width - m) comet.vx *= -0.985;
+    if (comet.y < m || comet.y > canvas.height - m) comet.vy *= -0.985;
+  }
+
+  // ---------- Döngü ----------
+  const info = document.getElementById('info');
+  function loop(){
+    drawBackground();
+    step();
+    drawComet();
+    info.textContent = `DPR:${DPR.toFixed(2)}  Tail:${comet.tail.length}  v:${Math.hypot(comet.vx,comet.vy).toFixed(2)}`;
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // Renk varyantı (R harfi ile değiştir)
+  addEventListener('keydown', e=>{
+    if(e.key.toLowerCase()==='r'){
+      comet.hue = (comet.hue===200)? 18 : 200; // mavi ↔ turuncu-kızıl
+    }
+  });
+})();
+</script>
+</body>
+</html>

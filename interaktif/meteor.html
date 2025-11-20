@@ -1,0 +1,248 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ✅ GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2F3B9KE37"></script> <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JE1HFWXE1');
+    </script>
+
+    <title>AUI • Yüksek Çözünürlüklü İnteraktif Meteor Yağmuru Simülasyonu</title>
+    <meta name="description" content="Gerçekçi ve etkileşimli meteor yağmuru simülasyonu. Yoğunluğu, rüzgarı, rengi kontrol edin ve büyüleyici uzay manzarasının keyfini çıkarın. Tam ekran deneyimi.">
+    <meta name="keywords" content="meteor yağmuru, uzay simülasyonu, interaktif animasyon, yıldız yağmuru, astronomi, canvas animasyon, AUI, html5 canvas">
+    <meta name="author" content="AUI">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AUI • İnteraktif Meteor Yağmuru Simülasyonu">
+    <meta property="og:description" content="Gerçek zamanlı, yüksek çözünürlüklü meteor yağmuru deneyimi. Kontrol edebileceğiniz büyüleyici bir uzay simülasyonu.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://orneksite.com/meteor-simulasyonu-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AUI • İnteraktif Meteor Yağmuru">
+    <meta name="twitter:description" content="Etkileşimli meteor yağmuru simülasyonu - uzayın büyüsünü keşfedin">
+    
+    <style>
+        html,body{height:100%;margin:0;background:#05070E;color:#E8F1FF;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial}
+        canvas{display:block;width:100vw;height:100vh}
+        .hud{
+            position:fixed;left:12px;bottom:12px;padding:8px 12px;border-radius:12px;
+            background:rgba(10,15,30,.35);border:1px solid rgba(255,255,255,.08);
+            box-shadow:0 10px 30px rgba(0,0,0,.35);backdrop-filter:blur(6px);
+            font-size:12px;line-height:1.5;user-select:none;color:#cfe8ff
+        }
+        .brand{position:fixed;right:14px;top:10px;opacity:.55;font-size:12px;letter-spacing:.08em}
+    </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="brand">AUI • Meteor Shower v1</div>
+<div class="hud" id="hud">Yükleniyor…</div>
+
+<script>
+(() => {
+  // ----- Canvas & HiDPI -----
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d', { alpha:false });
+  let DPR = Math.max(1, Math.min(3, devicePixelRatio || 1));
+  function resize(){
+    canvas.width  = Math.floor(innerWidth * DPR);
+    canvas.height = Math.floor(innerHeight * DPR);
+    canvas.style.width = innerWidth + "px";
+    canvas.style.height = innerHeight + "px";
+  }
+  resize(); addEventListener('resize', resize);
+
+  // ----- Random helpers -----
+  const R = (a=0,b=1)=>a+Math.random()*(b-a);
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+  // ----- Yıldız alanı -----
+  const stars = [];
+  const STAR_COUNT = 900;
+  function initStars(){
+    stars.length = 0;
+    for(let i=0;i<STAR_COUNT;i++){
+      stars.push({
+        x:R(0,canvas.width), y:R(0,canvas.height),
+        r:R(0.4,1.8)*DPR, tw:R(0.001,0.008), p:Math.random()*Math.PI*2,
+        a:R(0.35,1)
+      });
+    }
+  }
+  initStars();
+
+  // ----- Ay (opsiyonel) -----
+  let showMoon = true;
+  function drawMoon(){
+    if(!showMoon) return;
+    const x = canvas.width*0.82, y = canvas.height*0.18, r = 48*DPR;
+    // hafif aura
+    const g = ctx.createRadialGradient(x,y,0,x,y,r*3);
+    g.addColorStop(0,'rgba(255,255,230,.20)');
+    g.addColorStop(1,'rgba(255,255,230,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,r*3,0,Math.PI*2); ctx.fill();
+    // gövde
+    ctx.fillStyle = '#F6F7E8'; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+    // kraterler
+    ctx.fillStyle = 'rgba(0,0,0,.06)';
+    for(let i=0;i<10;i++){
+      const k = {x:x+R(-r*0.7,r*0.7), y:y+R(-r*0.7,r*0.7), rr:R(2,7)*DPR};
+      ctx.beginPath(); ctx.arc(k.x,k.y,k.rr,0,Math.PI*2); ctx.fill();
+    }
+  }
+
+  // ----- Meteor modeli -----
+  const meteors = [];
+  let density = 140; // anlık hedef meteor sayısı
+  let wind = 0.008;  // rüzgâr (x ekseni itişi)
+  let angle = -0.9;  // düşüş açısı (radyan, negatif = sağ aşağı)
+  let colorMode = 0; // 0: mavi-beyaz, 1: turuncu-kızıl
+  let useBlur = true;
+
+  function spawnMeteor(edge="top"){
+    const speed = R(2.2, 6.2) * DPR;
+    // giriş konumu
+    let x, y;
+    if(edge==="top"){ x = R(-canvas.width*0.1, canvas.width*1.1); y = -40*DPR; }
+    else if(edge==="left"){ x = -40*DPR; y = R(-canvas.height*0.1, canvas.height*1.1); }
+    else { x = R(0,canvas.width); y = -40*DPR; }
+    const spread = R(-0.15,0.15);
+    const a = angle + spread;
+    const vx = Math.cos(a)*speed + wind*120*DPR;
+    const vy = Math.sin(a)*speed + R(0.2,0.6)*DPR;
+
+    const len = R(60, 220)*DPR;
+    const life = R(0.9, 2.1);
+    meteors.push({
+      x,y,vx,vy,len,life,age:0,
+      w:R(1.2,2.6)*DPR,
+      hue: colorMode? R(14,28) : R(180,220)
+    });
+  }
+
+  // ----- Arka plan çizimi -----
+  function drawBackground(){
+    if(useBlur){
+      // motion blur: yavaş şeffaf örtü
+      ctx.fillStyle = 'rgba(5,7,14,0.16)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    } else {
+      ctx.fillStyle = '#05070E';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
+    // yıldızlar (twinkle)
+    for(const s of stars){
+      s.p += s.tw;
+      const a = s.a*(0.75 + Math.sin(s.p)*0.25);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = '#cfe8ff';
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // ----- Meteor çizimi -----
+  function drawMeteor(m){
+    // kuyruk doğrultusu (ters yön)
+    const ang = Math.atan2(m.vy, m.vx) + Math.PI;
+    const tx = Math.cos(ang) * m.len;
+    const ty = Math.sin(ang) * m.len;
+
+    // glow
+    const g = ctx.createLinearGradient(m.x, m.y, m.x - tx, m.y - ty);
+    const col1 = `hsla(${m.hue}, 100%, 70%, 0.95)`;
+    const col2 = `hsla(${m.hue}, 100%, 60%, 0.35)`;
+    const col3 = `hsla(${m.hue}, 100%, 50%, 0)`;
+    g.addColorStop(0, col1);
+    g.addColorStop(0.2, col2);
+    g.addColorStop(1, col3);
+
+    ctx.strokeStyle = g;
+    ctx.lineWidth = m.w;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(m.x, m.y);
+    ctx.lineTo(m.x - tx, m.y - ty);
+    ctx.stroke();
+
+    // çekirdek
+    ctx.fillStyle = `hsl(${m.hue},100%,92%)`;
+    ctx.beginPath();
+    ctx.arc(m.x,m.y,m.w*0.55,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  // ----- Güncelleme -----
+  function step(dt){
+    // hedef yoğunluğa doğru doğum
+    const target = density|0;
+    if(meteors.length < target){
+      const need = Math.min(12, target - meteors.length);
+      for(let i=0;i<need;i++) spawnMeteor(Math.random()<0.5?"top":"left");
+    }
+
+    for(let i=meteors.length-1;i>=0;i--){
+      const m = meteors[i];
+      m.age += dt;
+      m.vx += wind * 0.6 * DPR;
+      m.x += m.vx; m.y += m.vy;
+      m.len *= 0.998; // yavaş kısalma
+      if(m.age>m.life || m.x<-200*DPR || m.y<-200*DPR || m.x>canvas.width+200*DPR || m.y>canvas.height+200*DPR){
+        meteors.splice(i,1);
+      } else {
+        drawMeteor(m);
+      }
+    }
+  }
+
+  // ----- Etkileşim -----
+  let dragging=false, last=null;
+  canvas.addEventListener('pointerdown', e=>{
+    dragging=true; last={x:e.clientX*DPR,y:e.clientY*DPR};
+  });
+  addEventListener('pointerup', ()=>dragging=false);
+  addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    const nx=e.clientX*DPR, ny=e.clientY*DPR;
+    // fareyi sürükleyerek rüzgâr + açı
+    wind += (nx-last.x) * 0.0000009;
+    angle += (ny-last.y) * -0.0009;
+    angle = clamp(angle, -2.4, -0.3);
+    last={x:nx,y:ny};
+  });
+
+  addEventListener('keydown', e=>{
+    const k = e.key.toLowerCase();
+    if(k==='+'){ density = clamp(density+20, 20, 600); }
+    else if(k==='-'){ density = clamp(density-20, 0, 600); }
+    else if(k==='w'){ wind = (Math.abs(wind)<0.001? 0.012 : 0); }
+    else if(k==='r'){ colorMode = 1 - colorMode; meteors.forEach(m=>m.hue = colorMode? R(14,28):R(180,220)); }
+    else if(k==='b'){ useBlur = !useBlur; }
+    else if(k==='m'){ showMoon = !showMoon; }
+    else if(k==='f'){ if(!document.fullscreenElement) canvas.requestFullscreen().catch(()=>{}); else document.exitFullscreen(); }
+  });
+
+  // ----- Döngü -----
+  let prev = performance.now();
+  function loop(t){
+    const now = t, dt = Math.min(0.033, (now - prev)/1000); prev = now;
+    drawBackground();
+    drawMoon();
+    step(dt);
+    document.getElementById('hud').innerHTML =
+      `DPR:${DPR.toFixed(2)} • Meteors:${meteors.length} / ${density} • Wind:${wind.toFixed(3)} • Angle:${angle.toFixed(2)}<br>`+
+      `Kısayollar: <b>+</b>/<b>-</b> yoğunluk • <b>W</b> rüzgâr • <b>R</b> renk • <b>B</b> blur • <b>M</b> ay • <b>F</b> tam ekran • sürükle: açı/rüzgâr`;
+    requestAnimationFrame(loop);
+  }
+  // İlk çerçeve: tam doldur
+  ctx.fillStyle = '#05070E'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
