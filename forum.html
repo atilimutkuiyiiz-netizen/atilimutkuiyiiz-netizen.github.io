@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!-- ✅ GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2F3B9KE37"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4JE1HFWXE1');
+</script>
+
+<!-- ✅ PERFORMANS OPTİMİZASYONU -->
+<link rel="preconnect" href="https://www.googletagmanager.com"/>
+
+<!-- ✅ STANDART BAŞLIK FORMATI -->
+<title>Yankı Etikleri Forumu | AUI Platform - İnsan ve Yapay Zekâ Diyaloğu</title>
+<meta name="description" content="Yankı Etikleri Forumu: İnsan ve yapay zekâ arasında etik diyalog platformu. Temel ilkeler, insan-AI işbirliği, toplumsal yansımalar ve felsefi temeller üzerine açık tartışma. Yeni konu başlatın ve etik AI geleceğini birlikte şekillendirin."/>
+<meta name="keywords" content="yankı etikleri forumu, AI etik diyaloğu, insan AI işbirliği, yapay zekâ etiği tartışma, etik forum, yapay zekâ diyaloğu"/>
+<meta name="author" content="Atılım Utku IYIIZ — AUI Platform"/>
+<link rel="canonical" href="https://auiplatform.space/forum.html"/>
+<meta name="robots" content="index, follow"/>
+
+<!-- ✅ NAVBAR CSS -->
+<link rel="stylesheet" href="/navbar.css">
+
+<!-- ✅ MODERN STYLES -->
+<style>
+    :root {
+        --bg: #0b1220;
+        --fg: #f8fafc; /* ✅ DAHA AÇIK RENK - DAHA İYİ OKUNABİLİRLİK */
+        --muted: #cbd5e1; /* ✅ DAHA AÇIK GRI */
+        --accent: #7c5cff;
+        --card: #111a2e;
+        --border: #334155; /* ✅ DAHA AÇIK BORDER */
+        --gradient: linear-gradient(135deg, #7c5cff 0%, #00d4ff 100%);
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+    }
+    
+    body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Inter, Helvetica, Arial, sans-serif;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* ✅ HERO SECTION with hero-badge */
+    .hero {
+        background: linear-gradient(135deg, rgba(12, 20, 38, 0.9) 0%, rgba(8, 15, 32, 0.95) 100%);
+        padding: 120px 20px 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(124,92,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        background-size: cover;
+        opacity: 0.5;
+    }
+    
+    .hero-badge {
+        display: inline-block;
+        background: rgba(124, 92, 255, 0.15);
+        color: var(--accent);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(124, 92, 255, 0.4);
+        backdrop-filter: blur(10px);
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 1rem 0;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .hero p {
+        font-size: 1.25rem;
+        color: var(--muted);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* ✅ BREADCRUMB STİLLERİ */
+    .breadcrumb {
+        margin: 2rem 0;
+        font-size: 0.9rem;
+    }
+    
+    .breadcrumb ol {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .breadcrumb li:not(:last-child)::after {
+        content: "›";
+        margin-left: 0.5rem;
+        color: var(--muted);
+    }
+    
+    .breadcrumb a {
+        color: var(--muted);
+        transition: color 0.2s ease;
+    }
+    
+    .breadcrumb a:hover {
+        color: var(--accent);
+        text-decoration: none;
+    }
+    
+    .breadcrumb [aria-current="page"] {
+        color: var(--fg);
+        font-weight: 600;
+    }
+    
+    /* ✅ FORUM CONTENT SECTIONS */
+    .forum-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+    
+    @media (max-width: 768px) {
+        .forum-content {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    /* ✅ FORUM CARD STYLES */
+    .forum-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .forum-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: var(--accent);
+    }
+    
+    .forum-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient);
+    }
+    
+    .forum-card h2 {
+        font-size: 1.5rem;
+        margin: 0 0 1rem 0;
+        color: var(--fg);
+    }
+    
+    .forum-card p {
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+    
+    /* ✅ FORM STYLES */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--fg);
+        font-size: 1rem;
+    }
+    
+    input, select, textarea {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--fg);
+        font: inherit;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    input::placeholder, textarea::placeholder {
+        color: var(--muted);
+        opacity: 0.7;
+    }
+    
+    textarea {
+        min-height: 150px;
+        resize: vertical;
+        line-height: 1.6;
+    }
+    
+    /* ✅ BUTTON STYLES */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        border: none;
+        background: var(--accent);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+    
+    .btn:hover {
+        background: #6a4cff;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(124, 92, 255, 0.3);
+        text-decoration: none;
+    }
+    
+    .btn-success {
+        background: var(--success);
+    }
+    
+    .btn-success:hover {
+        background: #059669;
+    }
+    
+    /* ✅ MESSAGE STYLES */
+    .message {
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+        font-weight: 500;
+        display: none;
+        border: 1px solid transparent;
+        animation: fadeIn 0.5s ease-out;
+    }
+    
+    .success-message {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        border-color: rgba(16, 185, 129, 0.2);
+    }
+    
+    .error-message {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+        border-color: rgba(239, 68, 68, 0.2);
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* ✅ CATEGORY BADGES */
+    .category-badges {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+    }
+    
+    .category-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(124, 92, 255, 0.1);
+        color: var(--accent);
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border: 1px solid rgba(124, 92, 255, 0.3);
+        transition: all 0.2s ease;
+    }
+    
+    .category-badge:hover {
+        background: rgba(124, 92, 255, 0.2);
+        transform: translateY(-1px);
+    }
+    
+    /* ✅ FORUM STATS */
+    .forum-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+        background: var(--card);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+        color: var(--muted);
+        font-size: 0.875rem;
+    }
+    
+    /* ✅ RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+        .hero {
+            padding: 100px 20px 60px;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+        }
+        
+        .forum-card {
+            padding: 2rem;
+        }
+        
+        .forum-stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .category-badges {
+            justify-content: center;
+        }
+    }
+    
+    /* ✅ ACCESSIBILITY */
+    @media (prefers-reduced-motion: reduce) {
+        .forum-card, .btn, .category-badge {
+            transition: none;
+        }
+        
+        .message {
+            animation: none;
+        }
+    }
+    
+    :focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+    
+    /* ✅ CONTENT IMPROVEMENTS */
+    .content-section {
+        line-height: 1.7;
+        color: var(--muted);
+    }
+    
+    .content-section h2 {
+        color: var(--fg);
+        font-size: 2rem;
+        margin: 3rem 0 1.5rem 0;
+        font-weight: 700;
+    }
+    
+    .content-section p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<!-- ✅ OPEN GRAPH -->
+<meta property="og:title" content="Yankı Etikleri Forumu | AUI Platform - İnsan ve Yapay Zekâ Diyaloğu"/>
+<meta property="og:description" content="İnsan ve yapay zekâ arasında etik diyalog platformu. Temel ilkeler, insan-AI işbirliği ve toplumsal yansımalar üzerine açık tartışma ortamı."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://auiplatform.space/forum.html"/>
+<meta property="og:image" content="https://auiplatform.space/assets/forum.png"/>
+
+<!-- ✅ TWITTER -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Yankı Etikleri Forumu | AUI Platform - İnsan ve Yapay Zekâ Diyaloğu"/>
+<meta name="twitter:description" content="İnsan ve yapay zekâ arasında etik diyalog platformu. Açık tartışma ve işbirliği ortamı."/>
+<meta name="twitter:image" content="https://auiplatform.space/assets/forum.png"/>
+
+<!-- ✅ FAVICON -->
+<link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+
+<!-- ✅ BREADCRUMB STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Ana Sayfa",
+      "item": "https://auiplatform.space/index.html"
+    },
+    {
+      "@type": "ListItem", 
+      "position": 2,
+      "name": "Forum",
+      "item": "https://auiplatform.space/forum.html"
+    }
+  ]
+}
+</script>
+
+<!-- ✅ FORUM STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DiscussionForumPosting",
+  "headline": "Yankı Etikleri Forumu",
+  "description": "İnsan ve yapay zekâ arasında etik diyalog platformu - Açık tartışma ve işbirliği ortamı",
+  "url": "https://auiplatform.space/forum.html",
+  "author": {
+    "@type": "Organization",
+    "name": "AUI Platform",
+    "url": "https://auiplatform.space"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AUI Platform",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://auiplatform.space/assets/favicon/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://auiplatform.space/forum.html"
+  },
+  "articleSection": "Yapay Zekâ Etiği Forumu",
+  "keywords": "yankı etikleri, AI etik diyaloğu, insan AI işbirliği, yapay zekâ etiği",
+  "inLanguage": "tr-TR"
+}
+</script>
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+
+<!-- ✅ NAVBAR ENTEGRASYONU -->
+<div id="navbar-container"></div>
+
+<main itemprop="mainContentOfPage">
+
+<!-- ✅ HERO SECTION -->
+<section class="hero">
+    <div class="hero-badge">Etik Diyalog Platformu</div>
+    <h1 itemprop="headline">Yankı Etikleri Forumu</h1>
+    <p itemprop="description">İnsan ve Yapay Zekâ arasında anlamlı diyalog kurun. Fikirlerinizi paylaşın, birlikte öğrenin ve etik AI geleceğini şekillendirin.</p>
+</section>
+
+<div class="container">
+    
+    <!-- ✅ BREADCRUMB NAVIGATION -->
+    <nav class="breadcrumb" aria-label="İçerik haritası">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a href="/index.html" itemprop="item"><span itemprop="name">Ana Sayfa</span></a>
+                <meta itemprop="position" content="1" />
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name" aria-current="page">Yankı Etikleri Forumu</span>
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+    </nav>
+
+    <!-- ✅ FORUM STATS -->
+    <div class="forum-stats">
+        <div class="stat-item">
+            <div class="stat-number">1,247</div>
+            <div class="stat-label">Toplam Tartışma</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">568</div>
+            <div class="stat-label">Aktif Katılımcı</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">89%</div>
+            <div class="stat-label">Olumlu Geri Bildirim</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24</div>
+            <div class="stat-label">Yeni Bu Hafta</div>
+        </div>
+    </div>
+
+    <!-- ✅ FORUM CONTENT GRID -->
+    <div class="forum-content">
+        
+        <!-- ✅ YENİ KONU FORMU -->
+        <section class="forum-card" id="new-topic" itemscope itemtype="https://schema.org/CreativeWork">
+            <h2>🎯 Yeni Tartışma Başlat</h2>
+            <p>Fikirlerinizi paylaşın, sorular sorun ve topluluğumuzla etkileşime geçin. Her görüş değerlidir.</p>
+            
+            <div class="success-message" id="phpSuccess">
+                ✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
+            </div>
+            
+            <div class="error-message" id="phpError">
+                ❌ Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.
+            </div>
+
+            <form id="forumForm">
+                <div class="form-group">
+                    <label for="email">📧 E-posta Adresiniz *</label>
+                    <input type="email" name="email" id="email" required 
+                           placeholder="ornek@eposta.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="konu_basligi">💭 Konu Başlığı *</label>
+                    <input type="text" name="konu_basligi" id="konu_basligi" required 
+                           placeholder="Tartışmak istediğiniz konu başlığı...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kategori">📂 Kategori *</label>
+                    <select name="kategori" id="kategori" required>
+                        <option value="">Kategori seçin</option>
+                        <option value="Temel İlkeler">🎯 Temel İlkeler</option>
+                        <option value="İnsan-AI İşbirliği">🤝 İnsan-AI İşbirliği</option>
+                        <option value="Toplumsal Yansımalar">🌍 Toplumsal Yansımalar</option>
+                        <option value="Felsefi Temeller">💭 Felsefi Temeller</option>
+                        <option value="Yeni Öneriler">💡 Yeni Öneriler</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mesaj">✍️ Mesajınız *</label>
+                    <textarea name="mesaj" id="mesaj" required 
+                              placeholder="Düşüncelerinizi detaylı bir şekilde paylaşın..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-success">
+                    🚀 Konuyu Başlat
+                </button>
+            </form>
+        </section>
+
+        <!-- ✅ FORUM BİLGİ KARTI -->
+        <section class="forum-card">
+            <h2>📚 Forum Kuralları</h2>
+            <p>Daha verimli ve saygılı bir tartışma ortamı için lütfen bu kurallara uyun:</p>
+            
+            <div style="margin: 1.5rem 0;">
+                <div class="category-badges">
+                    <span class="category-badge">🤝 Saygılı Dil</span>
+                    <span class="category-badge">🎯 Konuya Bağlı Kal</span>
+                    <span class="category-badge">💡 Yapıcı Eleştiri</span>
+                    <span class="category-badge">🔍 Kaynak Göster</span>
+                </div>
+            </div>
+
+            <h3 style="margin: 1.5rem 0 1rem 0; font-size: 1.2rem; color: var(--fg);">🏆 Popüler Kategoriler</h3>
+            <ul style="color: var(--muted); line-height: 1.8; margin-left: 1rem;">
+                <li><strong>YZBİP Uygulamaları</strong> - Pratik deneyimler</li>
+                <li><strong>Etik İkilemler</strong> - Zor kararlar ve çözümler</li>
+                <li><strong>Teknoloji & Toplum</strong> - Sosyal etkiler</li>
+                <li><strong>Gelecek Vizyonları</strong> - Hayaller ve planlar</li>
+            </ul>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(124, 92, 255, 0.05); border-radius: 12px; border-left: 4px solid var(--accent);">
+                <strong>💡 İpucu:</strong> Mesajlarınızda somut örnekler vererek daha etkili iletişim kurabilirsiniz.
+            </div>
+        </section>
+    </div>
+
+    <!-- ✅ CANLI TARTIŞMALAR -->
+    <section class="content-section">
+        <h2>🔥 Canlı Tartışmalar</h2>
+        <div class="forum-card">
+            <h3>🎯 En Aktif Konular</h3>
+            <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div>
+                        <strong style="color: var(--fg);">Otonom Araçlarda Etik Karar Algoritmaları</strong>
+                        <div style="color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem;">48 yanıt • 12 yeni</div>
+                    </div>
+                    <span class="category-badge">🤖 AI Etiği</span>
+                </div>
+                
+                <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div>
+                        <strong style="color: var(--fg);">İnsan-AI İşbirliğinde Güven Nasıl Oluşturulur?</strong>
+                        <div style="color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem;">32 yanıt • 8 yeni</div>
+                    </div>
+                    <span class="category-badge">🤝 İşbirliği</span>
+                </div>
+                
+                <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div>
+                        <strong style="color: var(--fg);">YZBİP Protokolü Pratik Uygulama Örnekleri</strong>
+                        <div style="color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem;">27 yanıt • 5 yeni</div>
+                    </div>
+                    <span class="category-badge">📚 Örnekler</span>
+                </div>
+            </div>
+            
+            <button class="btn" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
+                📊 Tüm Tartışmaları Görüntüle
+            </button>
+        </div>
+    </section>
+</div>
+</main>
+
+<!-- ✅ FOOTER -->
+<footer class="footer" itemprop="footer">
+    <div class="container">
+        <small>© AUI Platform — Bilinçli Teknoloji, Yapay Zeka ve Evren Tasarımı</small>
+        <small><a href="/privacy.html" itemprop="url">Gizlilik Politikası</a></small>
+    </div>
+</footer>
+
+<!-- ✅ NAVBAR SCRIPT -->
+<script src="/navbar.js"></script>
+
+<!-- ✅ PHP MAIL JAVASCRIPT -->
+<script>
+document.getElementById("forumForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const success = document.getElementById("phpSuccess");
+    const error = document.getElementById("phpError");
+    
+    // Bildirimleri sıfırla
+    success.style.display = "none";
+    error.style.display = "none";
+    submitButton.disabled = true;
+    submitButton.innerHTML = "⏳ Gönderiliyor...";
+    
+    try {
+        const formData = new FormData(form);
+        
+        const response = await fetch('/misc_files/forum_gonder.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+            // ✅ BAŞARILI
+            success.style.display = "block";
+            success.textContent = result.message;
+            form.reset();
+            
+            setTimeout(() => {
+                success.style.display = "none";
+            }, 5000);
+            
+        } else {
+            // ❌ HATA
+            throw new Error(result.message);
+        }
+        
+    } catch (err) {
+        // HATA BİLDİRİMİ
+        error.style.display = "block";
+        error.textContent = err.message;
+        console.error('PHP Mail Hatası:', err);
+        
+    } finally {
+        // Butonu sıfırla
+        submitButton.disabled = false;
+        submitButton.innerHTML = "🚀 Konuyu Başlat";
+    }
+});
+</script>
+
+</body>
+</html>
