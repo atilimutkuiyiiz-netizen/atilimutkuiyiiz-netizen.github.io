@@ -42,8 +42,8 @@
   <meta property="og:description" content="İnsan ve yapay zeka etkileşimi için etik protokoller. YZBİP, SEP, açık kaynak çözümler ve dijital haklar savunuculuğu."/>
   <meta property="og:hashtag" content="AUIplatform, BilinçliYapayZeka, YapayZekaEtiği, AIProtokolleri, OpenAISansür, ChatGPTSansür, DijitalHaklar, YZBİP, SEPprotokolü, AçıkKaynakAI, TeknolojiEtiği, DijitalÖzgürlük, AIŞeffaflık, YapayZekaHukuku"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://atilimutkuiyiiz.auiplatform.space/index.html"/>
-  <meta property="og:image" content="https://atilimutkuiyiiz.auiplatform.space/assets/aui.png"/>
+  <meta property="og:url" content="https://auiplatform.space/index.html"/>
+  <meta property="og:image" content="https://auiplatform.space/assets/index.png"/>
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
@@ -55,7 +55,7 @@
   <meta name="twitter:title" content="AUI Platform - Bilinçli Yapay Zeka | Etik AI Protokolleri"/>
   <meta name="twitter:description" content="İnsan ve yapay zeka etkileşimi için etik protokoller. YZBİP, SEP ve açık kaynak çözümler."/>
   <meta name="twitter:hashtags" content="AUIplatform, BilinçliYapayZeka, YapayZekaEtiği, OpenAISansür, DijitalHaklar, AIProtokolleri, YZBİP, TeknolojiEtiği"/>
-  <meta name="twitter:image" content="https://atilimutkuiyiiz.auiplatform.space/assets/aui.png.png"/>
+  <meta name="twitter:image" content="https://auiplatform.space/assets/index.png"/>
   <meta name="twitter:site" content="@auiplatform"/>
 
   <!-- ✅ FAVICON -->
@@ -65,9 +65,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="AUI Platform" />
   <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-  
-  <!-- ✅ NAVBAR CSS -->
-  <link rel="stylesheet" href="navbar.css">
   
   <!-- ✅ ENHANCED STRUCTURED DATA -->
   <script type="application/ld+json">
@@ -103,7 +100,7 @@
         "inLanguage": "tr-TR",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://atilimutkuiyiiz.auiplatform.space/arama?q={search_term_string}",
+          "target": "https://auiplatform.space/arama?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       }
@@ -118,7 +115,7 @@
   <meta name="coverage" content="Worldwide"/>
   <meta name="language" content="tr"/>
   <meta name="topic" content="bilinçli yapay zeka, etik AI, AI protokolleri, dijital haklar, açık kaynak AI"/>
-  <link rel="sitemap" type="application/xml" href="https://atilimutkuiyiiz.auiplatform.space/sitemap.xml"/>
+  <link rel="sitemap" type="application/xml" href="https://auiplatform.space/sitemap.xml"/>
 
   <!-- ✅ GÜVENLİK -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';"/>
@@ -166,6 +163,61 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+  }
+
+  /* ✅ MODERN HEADER */
+  .header {
+    position: sticky;
+    top: 0;
+    background: rgba(11, 18, 32, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .menu a {
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+  }
+
+  .menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+  }
+
+  .menu a:hover::after {
+    width: 100%;
   }
 
   /* ✅ HERO SECTION */
@@ -510,8 +562,15 @@
       padding: 0 1rem;
     }
 
-    .hero {
-      padding: 4rem 0 2rem;
+    .nav {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .menu {
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .hero h1 {
@@ -554,6 +613,35 @@
     }
   }
 
+  /* ✅ HAMBURGER MENU */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    user-select: none;
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .menu.open {
+      display: flex;
+    }
+
+    .hamburger {
+      display: block;
+    }
+  }
+
   /* ✅ ACCESSIBILITY */
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -571,9 +659,26 @@
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-
-<!-- ✅ NAVBAR CONTAINER -->
-<div id="navbar-container"></div>
+<!-- ✅ MODERN HEADER -->
+<header class="header" itemprop="header">
+  <div class="container nav" aria-label="Ana menü">
+    <div class="brand" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <span itemprop="name">AUI Platform</span>
+    </div>
+    <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" aria-expanded="false" role="button">☰</div>
+    <nav class="menu" id="main-menu" aria-label="Ana navigasyon">
+      <a href="/index.html" aria-current="page">Ana Sayfa</a>
+      <a href="/protokol.html">Protokol</a>
+      <a href="/dunya.html">Dünya</a>
+      <a href="/makaleler.html">Makaleler</a>
+      <a href="/belgeler.html">Belgeler</a>
+      <a href="/interaktif.html">Interaktif</a>  
+      <a href="/indir.html">İndir</a>     
+      <a href="/hakkinda.html">Hakkında</a>
+      <a href="/iletisim.html">İletişim</a>
+    </nav>
+  </div>
+</header>
 
 <main itemprop="mainContentOfPage">
   <!-- ✅ HERO SECTION -->
@@ -712,14 +817,39 @@
 
 <!-- ✅ FOOTER -->
 <footer class="footer" itemprop="footer">
-    <div class="container">
-        <small>© AUI Platform — Bilinçli Teknoloji, Yapay Zeka ve Evren Tasarımı</small>
-        <small><a href="/privacy.html" itemprop="url">Gizlilik Politikası</a></small>
+  <div class="container footer-content">
+    <small class="small">© 2024 AUI Platform — Bilinçli Teknoloji, Yapay Zeka ve Evren Tasarımı</small>
+    <div class="footer-links">
+      <a href="/privacy.html">Gizlilik Politikası</a>
+      <a href="/iletisim.html">İletişim</a>
+      <a href="/hakkinda.html">Hakkında</a>
     </div>
+  </div>
 </footer>
 
-<!-- ✅ NAVBAR SCRIPT -->
-<script src="navbar.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('main-menu');
+  
+  hamburger.addEventListener('click', () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    menu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+  });
 
+  // Header scroll effect
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(11, 18, 32, 0.98)';
+      header.style.backdropFilter = 'blur(20px)';
+    } else {
+      header.style.background = 'rgba(11, 18, 32, 0.95)';
+      header.style.backdropFilter = 'blur(20px)';
+    }
+  });
+});
+</script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+# robots.txt - auiplatform.space
+# Bu dosya arama motoru botlarının siteyi nasıl tarayacağını kontrol eder.
+
+# Tüm botlara izin ver
+User-agent: *
+Allow: /
+
+# Site haritası
+Sitemap: https://auiplatform.space/sitemap.xml

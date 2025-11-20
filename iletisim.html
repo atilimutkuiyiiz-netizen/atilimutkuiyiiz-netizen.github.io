@@ -66,9 +66,6 @@
 <meta name="apple-mobile-web-app-title" content="AUI Platform" />
 <link rel="manifest" href="/assets/favicon/site.webmanifest" />
 
-<!-- ✅ NAVBAR CSS -->
-<link rel="stylesheet" href="navbar.css">
-
 <!-- ✅ BREADCRUMB STRUCTURED DATA -->
 <script type="application/ld+json">
 {
@@ -125,8 +122,8 @@
 </script>
 
 <!-- ✅ SEMANTİK & TEKNİK META -->
-<meta name="theme-color" content="#0b1220"/>
-<meta name="msapplication-TileColor" content="#0b1220"/>
+<meta name="theme-color" content="#000000"/>
+<meta name="msapplication-TileColor" content="#000000"/>
 <meta name="generator" content="AUI Platform"/>
 <meta name="coverage" content="Worldwide"/>
 <meta name="language" content="tr"/>
@@ -137,519 +134,182 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self';"/>
 
 <style>
-:root {
-  --bg: #0b1220;
-  --fg: #e7ecf4;
-  --muted: #aab4c0;
-  --accent: #7c5cff;
-  --accent-hover: #6a4cff;
-  --card: #111a2e;
-  --border: #22304a;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --gradient: linear-gradient(135deg, #7c5cff 0%, #3b82f6 100%);
-}
+:root{--bg:#0b1220;--fg:#e7ecf4;--muted:#aab4c0;--accent:#7c5cff;--card:#111a2e;--border:#22304a}
+*{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.header{position:sticky;top:0;background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.brand{font-weight:800;letter-spacing:.5px}
+.menu{display:flex;gap:14px;flex-wrap:wrap}
+.card{border:1px solid var(--border);border-radius:16px;background:var(--card);padding:16px}
+.footer{border-top:1px solid var(--border);margin-top:40px}
+.footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+small,.small{color:var(--muted)}
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:920px){.grid{grid-template-columns:1.1fr .9fr}}
+h1{margin:12px 0 0 0; font-size: 2.2rem; color: var(--accent);}
+h2{margin:0 0 16px; font-size: 1.5rem; color: var(--accent);}
 
-html, body {
-  background: var(--bg);
-  color: var(--fg);
-  font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial;
-  min-height: 100vh;
-  scroll-behavior: smooth;
-}
+/* ✅ BREADCRUMB STİLLERİ */
+.breadcrumb {margin: 0 0 20px 0; padding: 0; font-size: 0.9rem;}
+.breadcrumb ol {display: flex; list-style: none; margin: 0; padding: 0; gap: 8px;}
+.breadcrumb li:not(:last-child)::after {content: "›"; margin-left: 8px; color: var(--muted);}
+.breadcrumb a {color: var(--muted);}
+.breadcrumb a:hover {color: var(--accent);}
+.breadcrumb [aria-current="page"] {color: var(--fg);}
 
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
+/* ✅ FORM STİLLERİ */
+.form-group {margin-bottom: 20px;}
+label{font-weight:600;margin-bottom:8px;display:block;color:var(--fg)}
+input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font:inherit; transition: border-color 0.2s ease;}
+input:focus, textarea:focus {outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.1);}
+textarea{min-height:140px;resize:vertical}
+button{display:inline-block;padding:12px 24px;border-radius:12px;border:1px solid var(--border);background:var(--accent);color:#fff;font-weight:700;cursor:pointer; transition: all 0.2s ease; width: 100%;}
+button:hover:not([disabled]) {background: #6a4cff; transform: translateY(-1px);}
+button[disabled]{opacity:.6;cursor:not-allowed; transform: none !important;}
 
-a:hover {
-  color: var(--accent-hover);
-  text-decoration: underline;
-}
+/* ✅ İLETİŞİM BİLGİLERİ STİLLERİ */
+.contact-info {line-height: 1.7;}
+.contact-info p {margin: 0 0 16px 0;}
+.contact-info strong {color: var(--accent);}
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* ✅ HERO SECTION */
-.hero {
-  padding: 4rem 0 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(124, 92, 255, 0.1) 0%, transparent 70%);
-  animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-badge {
-  display: inline-block;
-  background: rgba(124, 92, 255, 0.1);
-  color: var(--accent);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(124, 92, 255, 0.3);
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--fg) 0%, var(--muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero p {
-  font-size: 1.125rem;
-  color: var(--muted);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-
-/* ✅ CARD STYLES */
-.card {
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--card);
-  padding: 2rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient);
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* ✅ GRID LAYOUT */
-.grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 920px) {
-  .grid {
-    grid-template-columns: 1.1fr 0.9fr;
-  }
-}
-
-/* ✅ TYPOGRAPHY */
-h1 {
-  margin: 0 0 1rem 0;
-  font-size: 2.2rem;
-  color: var(--accent);
-  font-weight: 700;
-}
-
-h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.small {
-  color: var(--muted);
-  font-size: 0.875rem;
-}
-
-/* ✅ BREADCRUMB STYLES */
-.breadcrumb {
-  margin: 2rem 0 1rem 0;
-  padding: 0;
-  font-size: 0.9rem;
-}
-
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.breadcrumb li:not(:last-child)::after {
-  content: "›";
-  margin-left: 0.5rem;
-  color: var(--muted);
-}
-
-.breadcrumb a {
-  color: var(--muted);
-  transition: color 0.3s ease;
-}
-
-.breadcrumb a:hover {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.breadcrumb [aria-current="page"] {
-  color: var(--fg);
-  font-weight: 500;
-}
-
-/* ✅ FORM STYLES */
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-label {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  display: block;
-  color: var(--fg);
-}
-
-input, textarea {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--fg);
-  font: inherit;
-  transition: all 0.3s ease;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.1);
-}
-
-textarea {
-  min-height: 140px;
-  resize: vertical;
-}
-
-/* ✅ BUTTON STYLES */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  justify-content: center;
-}
-
-.btn-primary {
-  background: var(--gradient);
-  color: white;
-  box-shadow: 0 4px 14px 0 rgba(124, 92, 255, 0.4);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(124, 92, 255, 0.6);
-  text-decoration: none;
-}
-
-button[type="submit"] {
-  background: var(--gradient);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  font-size: 1rem;
-}
-
-button[type="submit"]:hover:not([disabled]) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(124, 92, 255, 0.6);
-}
-
-button[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-/* ✅ CONTACT INFO STYLES */
-.contact-info {
-  line-height: 1.7;
-}
-
-.contact-info p {
-  margin: 0 0 1rem 0;
-}
-
-.contact-info strong {
-  color: var(--accent);
-}
-
-.contact-info ul {
-  margin: 0.5rem 0;
-  padding-left: 1.25rem;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.contact-info li {
-  margin-bottom: 0.25rem;
-}
-
-/* ✅ FOOTER */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-  margin-top: 4rem;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.footer-links a {
-  color: var(--muted);
-  font-size: 0.875rem;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--fg);
-  text-decoration: none;
-}
-
-/* ✅ MOBILE RESPONSIVE */
+/* ✅ MOBİL OPTİMİZASYONLARI */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 1rem;
-  }
-
-  .hero {
-    padding: 3rem 0 1.5rem;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  .grid {
-    gap: 1.5rem;
-  }
-
-  input, textarea {
-    padding: 0.875rem 1rem;
-  }
-
-  .breadcrumb ol {
-    flex-wrap: wrap;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-links {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+  .container {padding: 16px;}
+  .nav {flex-direction: column; align-items: flex-start;}
+  .menu {gap: 8px; margin-top: 12px; flex-wrap: wrap;}
+  .menu a {padding: 8px 12px; background: var(--border); border-radius: 8px; font-size: 14px;}
+  .card {padding: 14px;}
+  h1 {font-size: 1.8rem;}
+  h2 {font-size: 1.3rem;}
+  .grid {gap: 12px;}
+  input, textarea {padding: 10px 12px;}
+  button {padding: 10px 16px;}
+  .breadcrumb ol {flex-wrap: wrap;}
 }
 
-/* ✅ ACCESSIBILITY */
+/* ✅ GÜVENLİK & ERİŞİLEBİLİRLİK */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  * {animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;}
+  button {transition: none;}
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+/* ✅ MENÜ AÇ/KAPAT STİLLERİ */
+.menu {display: flex;}
+@media (max-width: 768px) {
+  .menu {display: none; flex-direction: column; width: 100%; margin-top: 12px;}
+  .menu.open {display: flex;}
+  .hamburger {display: block; cursor: pointer;}
+}
+@media (min-width: 769px) {
+  .hamburger {display: none;}
 }
 </style>
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-
-<!-- ✅ NAVBAR CONTAINER -->
-<div id="navbar-container"></div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
-<main itemprop="mainContentOfPage">
-  <!-- ✅ HERO SECTION -->
-  <section class="hero">
-    <div class="container hero-content">
-
-      <span class="hero-badge">İletişim</span>
-      <h1 itemprop="headline">Bizimle İletişime Geçin</h1>
-      <p itemprop="description">Yapay zekâ etiği, bilinçsel protokoller ve teknoloji işbirlikleri için soru, öneri ve tekliflerinizi bekliyoruz. 24-48 saat içinde yanıt veriyoruz.</p>
+<header class="header" itemprop="header">
+  <div class="container nav" aria-label="Ana menü">
+    <div class="brand" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <span itemprop="name">AUI Platform</span>
     </div>
-  </section>
-
-  <div class="container">
-    <!-- ✅ BREADCRUMB NAVIGATION -->
-    <nav class="breadcrumb" aria-label="İçerik haritası">
-      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/index.html" itemprop="item"><span itemprop="name">Ana Sayfa</span></a>
-          <meta itemprop="position" content="1" />
-        </li>
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <span itemprop="name" aria-current="page">İletişim</span>
-          <meta itemprop="position" content="2" />
-        </li>
-      </ol>
+    <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" aria-expanded="false" role="button">☰</div>
+    <nav class="menu" id="main-menu" aria-label="Ana navigasyon">
+      <a href="/index.html">Ana Sayfa</a>
+      <a href="/protokol.html">Protokol</a>
+      <a href="/dunya.html">Dünya</a>
+      <a href="/makaleler.html">Makaleler</a>
+      <a href="/belgeler.html">Belgeler</a>
+      <a href="/interaktif.html">Interaktif</a>  
+      <a href="/indir.html">İndir</a>     
+      <a href="/hakkinda.html">Hakkında</a>
+      <a href="/iletisim.html" aria-current="page">İletişim</a>
     </nav>
-
-    <div class="grid">
-      <section class="card" itemscope itemtype="https://schema.org/ContactPage">
-        <h2 itemprop="headline">Mesaj Gönderin</h2>
-        <p class="small" itemprop="description">Her türlü soru, öneri veya işbirliği için formu doldurun. Yanıtlar e-postanıza gelir.</p>
-
-        <form action="/misc_files/contact.php" method="post" itemprop="mainEntity" itemscope itemtype="https://schema.org/ContactPoint">
-          <div class="form-group">
-            <label for="name">Adınız</label>
-            <input id="name" name="name" placeholder="Ad Soyad" required type="text" aria-required="true"/>
-          </div>
-          
-          <div class="form-group">
-            <label for="email">E-posta</label>
-            <input id="email" name="email" placeholder="ornek@eposta.com" required type="email" aria-required="true" itemprop="email"/>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Mesajınız</label>
-            <textarea id="message" name="message" placeholder="Merhaba, size ulaşmak istiyorum..." required aria-required="true" itemprop="description"></textarea>
-          </div>
-          
-          <button type="submit" class="btn-primary">📧 Mesajı Gönder</button>
-        </form>
-      </section>
-
-      <aside class="card" itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
-        <h2>İletişim Bilgileri</h2>
-        <div class="contact-info">
-          <p><strong itemprop="email">atilimutkuiyiiz@gmail.com</strong></p>
-          <p class="small">Yanıt adresimiz</p>
-          
-          <p><strong itemprop="url">auiplatform.space</strong></p>
-          <p class="small">Resmi web sitemiz</p>
-          
-          <p class="small">Geri dönüş süresi genellikle <strong>24–48 saat</strong> içindedir.</p>
-          
-          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-            <p class="small"><strong>Öncelikli Konular:</strong></p>
-            <ul>
-              <li>Yapay Zeka Etiği</li>
-              <li>Teknoloji İşbirlikleri</li>
-              <li>YZBİP Protokolü</li>
-              <li>Açık Kaynak Katkıları</li>
-              <li>Bilinçsel Protokoller</li>
-              <li>Akademik İşbirlikleri</li>
-            </ul>
-          </div>
-        </div>
-      </aside>
-    </div>
   </div>
+</header>
+
+<main itemprop="mainContentOfPage">
+<div class="container">
+  <!-- ✅ BREADCRUMB NAVIGATION -->
+  <nav class="breadcrumb" aria-label="İçerik haritası">
+    <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/index.html" itemprop="item"><span itemprop="name">Ana Sayfa</span></a>
+        <meta itemprop="position" content="1" />
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name" aria-current="page">İletişim</span>
+        <meta itemprop="position" content="2" />
+      </li>
+    </ol>
+  </nav>
+
+  <div class="grid">
+    <section class="card" itemscope itemtype="https://schema.org/ContactPage">
+      <h1 itemprop="headline">İletişim</h1>
+      <p class="small" itemprop="description">Her türlü soru, öneri veya işbirliği için formu doldurun. Yanıtlar e-postanıza gelir.</p>
+
+      <form action="/misc_files/contact.php" method="post" itemprop="mainEntity" itemscope itemtype="https://schema.org/ContactPoint">
+        <div class="form-group">
+          <label for="name">Adınız</label>
+          <input id="name" name="name" placeholder="Ad Soyad" required type="text" aria-required="true"/>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">E-posta</label>
+          <input id="email" name="email" placeholder="ornek@eposta.com" required type="email" aria-required="true" itemprop="email"/>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Mesajınız</label>
+          <textarea id="message" name="message" placeholder="Merhaba…" required aria-required="true" itemprop="description"></textarea>
+        </div>
+        
+        <button type="submit">Gönder</button>
+      </form>
+    </section>
+
+    <aside class="card" itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
+      <h2>İletişim Bilgileri</h2>
+      <div class="contact-info">
+        <p class="small">Yanıt adresi: <strong itemprop="email">atilimutkuiyiiz@gmail.com</strong></p>
+        <p class="small">Domain: <strong itemprop="url">auiplatform.space</strong></p>
+        <p class="small">Geri dönüş süresi genellikle 24–48 saat.</p>
+        
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+          <p class="small"><strong>Öncelikli Konular:</strong></p>
+          <ul style="margin: 8px 0; padding-left: 20px; font-size: 0.9rem; color: var(--muted);">
+            <li>Yapay Zeka Etiği</li>
+            <li>Teknoloji İşbirlikleri</li>
+            <li>YZBİP Protokolü</li>
+            <li>Açık Kaynak Katkıları</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
 </main>
 
-<!-- ✅ FOOTER -->
 <footer class="footer" itemprop="footer">
-    <div class="container">
-        <small>© AUI Platform — Bilinçli Teknoloji, Yapay Zeka ve Evren Tasarımı</small>
-        <small><a href="/privacy.html" itemprop="url">Gizlilik Politikası</a></small>
-    </div>
+  <div class="container">
+    <small class="small">© AUI Platform — Bilinçli Teknoloji, Yapay Zeka ve Evren Tasarımı</small>
+  </div>
 </footer>
 
-<!-- ✅ NAVBAR SCRIPT -->
-<script src="navbar.js"></script>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('main-menu');
+  
+  hamburger.addEventListener('click', () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    menu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+  });
+});
+</script>
 </body>
 </html>
